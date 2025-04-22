@@ -1,89 +1,186 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
-
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/10.12.4/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/10.12.4/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/10.12.4/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/10.12.4/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/10.12.4/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/10.12.4/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/10.12.4/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/10.12.4/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/10.12.4/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/10.12.4/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
-
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ボイスナレーター テキスト読み上げ</title>
+<style>
+    body { 
+        font-family: Arial, sans-serif; 
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        color: #333;
+    }
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    header {
+        background-color: #f8f8f8;
+        padding: 20px 0;
+        border-bottom: 1px solid #eee;
+    }
+    h1 { 
+        color: #333;
+        margin-bottom: 5px;
+    }
+    h2 { 
+        color: #555;
+        font-size: 1.5em;
+    }
+    h3 {
+        color: #666;
+        font-size: 1.3em;
+    }
+    p, ul { 
+        font-size: 16px; 
+    }
+    .app-info {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        align-items: flex-start;
+        margin-bottom: 30px;
+    }
+    .app-details {
+        flex: 1;
+        min-width: 300px;
+    }
+    .info-section {
+        margin-bottom: 30px;
+    }
+    .feature {
+        margin-bottom: 20px;
+    }
+    footer {
+        background-color: #f8f8f8;
+        padding: 20px 0;
+        margin-top: 40px;
+        border-top: 1px solid #eee;
+        text-align: center;
+    }
+    .footer-links {
+        margin-top: 10px;
+    }
+    .footer-links a {
+        margin: 0 10px;
+        color: #666;
+        text-decoration: none;
+    }
+    .footer-links a:hover {
+        text-decoration: underline;
+    }
+    strong {
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1>ボイスナレーター テキスト読み上げ</h1>
+        <p>ボイスリーダー - あなたの言葉</p>
     </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+</header>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+<div class="container">
+    <div class="app-info">
+        <div class="app-details">
+            <div class="info-section">
+                <p><strong>開発者:</strong> 遠藤拓弥</p>
+                <p><strong>対応機種:</strong> iPhone</p>
+                <p><strong>価格:</strong> 無料</p>
+                <p><strong>カテゴリ:</strong> ナビゲーション</p>
+                <p><strong>年齢制限:</strong> 4+</p>
+            </div>
+        </div>
+    </div>
 
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
-    </script>
-  </body>
-</html>
+    <div class="info-section">
+        <h2>説明</h2>
+        <h3>ボイスナレーター：テキストを音声対話に変換</h3>
+
+        <div class="feature">
+            <h3>はじめに:</h3>
+            <p>マルチタスクが当たり前となった今日の忙しい世界で、VoiceYourTextはデジタルテキストと音声コミュニケーションの架け橋となる革新的なアプリケーションとして登場しました。このアプリは、あなたのモバイルデバイスを会話パートナーに変え、テキストを音声に変換することができます。運転中、料理中、あるいは単に読むよりも聞く方が好きな方にとって、VoiceYourTextは日常活動に音声を取り入れるためのシームレスなソリューションを提供します。</p>
+        </div>
+
+        <div class="feature">
+            <h3>特徴:</h3>
+            <p>ボイスナレーターには、あなたの体験を向上させ、テキスト読み上げをこれまで以上にアクセスしやすくするための様々な機能が満載です：</p>
+
+            <p><strong>1. ユーザーフレンドリーなインターフェース:</strong> シンプルさを念頭に設計されたこのアプリでは、音声に変換したいテキストを簡単に入力またはペーストすることができます。すっきりとしたレイアウトにより、あらゆる年齢のユーザーが手間なくアプリを操作できます。</p>
+
+            <p><strong>2. 多言語対応:</strong> 当アプリは複数の言語をサポートしており、様々な言語でテキストを音声に変換する柔軟性をユーザーに提供します。この機能は、言語学習者や複数の言語でコンテンツを消費する人々に特に役立ちます。</p>
+
+            <p><strong>3. テキストの保存と履歴:</strong> VoiceYourTextでは、よく使うテキストを保存し、過去の変換履歴を保持することができます。この機能により、よく使うフレーズやテキストを再入力やペーストすることなく、素早くアクセスすることができます。</p>
+        </div>
+
+        <div class="feature">
+            <h3>使用例:</h3>
+            <p>VoiceYourTextは幅広いユーザーとシナリオに対応しており、個人用にも業務用にも使える多目的ツールです。</p>
+
+            <p><strong>- アクセシビリティ:</strong> 視覚障害者や読書が困難な方々にとって、VoiceYourTextは書かれたコンテンツにアクセスする代替手段を提供するため、大きなメリットとなります。</p>
+
+            <p><strong>- 学習と教育:</strong> 言語学習者は、書かれた教材を音声に変換することで、発音とリスニングスキルを向上させることができます。また、教育者はこのアプリを使用して、学生のための音声コンテンツを作成することもできます。</p>
+
+            <p><strong>- 業務利用:</strong> 大量のテキストを読む必要がある忙しいビジネスパーソンは、通勤中や休憩中にレポート、メール、文書を聞くことができ、時間を節約し効率を高めることができます。</p>
+
+            <p><strong>- 個人の利便性:</strong> 聴覚学習を好む方や目を休ませたい方にとって、VoiceYourTextは本、記事、その他の書かれたコンテンツを快適に消費する方法を提供します。</p>
+        </div>
+
+        <div class="feature">
+            <h3>今後の開発予定:</h3>
+            <p>私たちは常にVoiceYourTextの改善に取り組み、ユーザー体験を向上させる新機能を追加しています。今後のアップデートでは、より多くの音声オプション、自然な音声のためのAI改善、ポピュラーなプラットフォームやデバイスとの連携機能の強化が含まれる予定です。</p>
+        </div>
+    </div>
+
+    <div class="info-section">
+        <h2>最新情報</h2>
+        <h3>バージョン履歴</h3>
+        <p><strong>2025年4月8日 バージョン 0.7.4</strong></p>
+        <p>バグ修正</p>
+    </div>
+
+    <div class="info-section">
+        <h2>アプリのプライバシー</h2>
+        <p>開発者、遠藤拓弥は、アプリのプライバシー慣行が以下に記載されるデータの取り扱いを含む可能性があることを示しました。詳細については、<a href="privacy_policy.html">開発者のプライバシーポリシー</a>をご覧ください。</p>
+        
+        <h3>データ収集なし</h3>
+        <p>開発者はこのアプリからデータを収集しません。</p>
+        
+        <p>プライバシーの慣行は、例えば、使用する機能や年齢によって異なる場合があります。</p>
+    </div>
+
+    <div class="info-section">
+        <h2>情報</h2>
+        <p><strong>販売者:</strong> 遠藤拓弥</p>
+        <p><strong>サイズ:</strong> 11.5 MB</p>
+        <p><strong>カテゴリ:</strong> ナビゲーション</p>
+        <p><strong>互換性:</strong></p>
+        <ul>
+            <li>iPhone: iOS 16.4以降が必要。</li>
+            <li>Mac: macOS 13.3以降とApple M1チップ以降を搭載したMacが必要。</li>
+            <li>Apple Vision: visionOS 1.0以降が必要。</li>
+        </ul>
+        <p><strong>言語:</strong> 英語、フランス語、ドイツ語、イタリア語、日本語、韓国語、スペイン語、タイ語、トルコ語、ベトナム語</p>
+        <p><strong>年齢制限:</strong> 4+</p>
+        <p><strong>著作権:</strong> © 遠藤拓弥</p>
+        <p><strong>価格:</strong> 無料</p>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <p>Copyright © 2025 遠藤拓弥. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="terms_of_service.html">利用規約</a>
+            <a href="privacy_policy.html">プライバシーポリシー</a>
+            <a href="#">サポート</a>
+        </div>
+    </div>
+</footer>
+</body>
+</html> 
